@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="665b276048d94c4995f4ad56917d7209" Name="Diagram1">
+        <EntityTypeShape EntityType="touresBalonBDModel.Campaign" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.Category" Width="1.5" PointX="1.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.Customer" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.Entertainment" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.Hotel" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.Order" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.OrderProduct" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.Product" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.StateCampaign" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.StateOrder" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="touresBalonBDModel.Transport" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="touresBalonBDModel.FK_Campaign_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_Campaign_StateCampaign" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_Customer_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_Product_Entertainment" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_Product_Hotel" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_OrderProduct_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_OrderProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="touresBalonBDModel.FK_Product_Transport" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

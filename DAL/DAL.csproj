@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C1CDE5F-0017-4BA5-8654-1B5FC9D5A93B}</ProjectGuid>
+    <ProjectGuid>{23C52337-69FB-40E9-91C2-A852733ED0D1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>dto</RootNamespace>
-    <AssemblyName>dto</AssemblyName>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -37,9 +37,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -54,81 +51,82 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Campaign.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Customer.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Entertainment.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Hotel.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelTouresBalon.Context.cs">
+    <Compile Include="ModelToureBalon.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelTouresBalon.Context.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelTouresBalon.cs">
+    <Compile Include="ModelToureBalon.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelTouresBalon.Designer.cs">
+    <Compile Include="ModelToureBalon.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelTouresBalon.edmx</DependentUpon>
+      <DependentUpon>ModelToureBalon.edmx</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderProduct.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateCampaign.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="StateOrder.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Transport.cs">
-      <DependentUpon>ModelTouresBalon.tt</DependentUpon>
+      <DependentUpon>ModelToureBalon.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="ModelTouresBalon.edmx">
+    <EntityDeploy Include="ModelToureBalon.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelTouresBalon.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelToureBalon.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ModelTouresBalon.edmx.diagram">
-      <DependentUpon>ModelTouresBalon.edmx</DependentUpon>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="ModelToureBalon.edmx.diagram">
+      <DependentUpon>ModelToureBalon.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="ModelToureBalon.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelToureBalon.Context.cs</LastGenOutput>
+      <DependentUpon>ModelToureBalon.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelToureBalon.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelToureBalon.edmx</DependentUpon>
+      <LastGenOutput>ModelToureBalon.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ModelTouresBalon.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelTouresBalon.edmx</DependentUpon>
-      <LastGenOutput>ModelTouresBalon.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ModelTouresBalon.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelTouresBalon.edmx</DependentUpon>
-      <LastGenOutput>ModelTouresBalon.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
