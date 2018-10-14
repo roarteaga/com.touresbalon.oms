@@ -26,6 +26,12 @@ textarea {
     background-color:white;
 }
 .navbar-inverse{
-    background-color:transparent;
-    border-color:transparent;
+    background-color:white;
+    border-color:white;
+}
+.container body-content{
+    padding-top:10px;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus{
+    color:blue;
 }
