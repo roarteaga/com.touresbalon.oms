@@ -1,0 +1,7 @@
+﻿@using System.Security.Claims
+@if (Request.IsAuthenticated)
+{
+<ul class="nav navbar-nav">
+    <li class="headmenuItem">@Html.ActionLink("Administrar productos", "Index", "Products")</li>
+</ul>
+}

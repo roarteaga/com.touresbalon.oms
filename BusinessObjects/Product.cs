@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,10 @@ namespace BusinessObjects
 {
     public class Product
     {
-        public string idProduct { get; set; }
-        public string idTransport { get; set; }
-        public string idEntertainment { get; set; }
+        [Key]
+        public long idProduct { get; set; }
+        public long idTransport { get; set; }
+        public long idEntertainment { get; set; }
         public string idHotel { get; set; }
         public string name { get; set; }
         public string urlImage { get; set; }
