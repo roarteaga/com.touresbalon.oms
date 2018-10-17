@@ -2,18 +2,16 @@
     ViewBag.Title = "Página de inicio OMS TouresBalón";
 }
 
-
-
+<br />
+<br />
+<br />
+<h2>Servicios disponibles</h2>
+<p>A continuación, se encuentran los sevicios disponibles para administración del aplicativo OMS de TouresBalón</p>
 <div class="row">
     <div class="col-md-4">
-        <h2>Servicios disponibles</h2>
-        <p>
-
-        </p>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Administración de productos", "Index", "Product", routeValues: null, htmlAttributes: new { @class="btn btn-default"})
-            </li>
-        </ul>
+        <div class="list-group">
+            @Html.ActionLink("Administración de productos", "Index", "Product", routeValues: null, htmlAttributes: new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Administración de campañas", "Index", "Campaign", routeValues: null, htmlAttributes: new { @class = "list-group-item list-group-item-action" })
+        </div>
     </div>
 </div>
