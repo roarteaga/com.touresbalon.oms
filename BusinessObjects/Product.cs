@@ -25,5 +25,8 @@ namespace BusinessObjects
         public string arrival_date { get; set; }
         public string departure_date { get; set; }
         public string description { get; set; }
+        public string IdUser { get; set; }
+        public string EventDate { get; set; }
+
     }
 }

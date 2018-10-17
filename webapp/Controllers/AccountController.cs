@@ -7,6 +7,10 @@ using webapp.App_Start;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using RestServices;
+using LoginObjects;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace webapp.Controllers
 {
@@ -55,15 +59,36 @@ namespace webapp.Controllers
         {
             return View();
         }
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            string token = UtilitiesLibrary.TokenGenerator.GenerateTokenJwt("rodolfo.arteaga");
-
             return View();
+        }
+        public ActionResult LogOff()
+        {
+            Session["user"] = null;
+            Session["token"] = null;
+            return RedirectToAction("Login", "Account");
+        }
+        //
+        // GET: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            //string token = UtilitiesLibrary.TokenGenerator.GenerateTokenJwt("rodolfo.arteaga");
+            AuthService auth = new AuthService();
+            string token = await auth.authentication(model.UserName, model.Password);
+            
+            if (token!=null && token != "")
+            {
+                Session["user"] = model.UserName;
+                Session["token"] = token;
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
         }
     }
 }

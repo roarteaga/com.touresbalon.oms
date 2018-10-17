@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,6 +57,14 @@
     <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj">
       <Project>{175FA786-AFB7-4BC7-BB6A-BA99B1AB151F}</Project>
       <Name>BusinessObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoginObjects\LoginObjects.csproj">
+      <Project>{4D775DC8-BADA-4485-8560-4ED8CD2F1C89}</Project>
+      <Name>LoginObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilitiesLibrary\UtilitiesLibrary.csproj">
+      <Project>{E5B8B595-31CA-4FD5-837F-77C79D7E4502}</Project>
+      <Name>UtilitiesLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

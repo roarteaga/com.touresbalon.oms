@@ -19,8 +19,16 @@ namespace webapp.Controllers
         
         public async Task<ActionResult> Index()
         {
-            ProductService productService = new ProductService();
-            return View(await productService.GetAllProducts());
+            if (Session["token"] != null)
+            {
+                ProductService productService = new ProductService();
+                return View(await productService.GetAllProducts());
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
         }
     }
 }

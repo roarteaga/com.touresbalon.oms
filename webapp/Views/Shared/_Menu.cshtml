@@ -1,7 +1,9 @@
 ﻿@using System.Security.Claims
-@if (Request.IsAuthenticated)
+@if (Session["token"]!=null)
 {
 <ul class="nav navbar-nav">
-    <li class="headmenuItem">@Html.ActionLink("Administrar productos", "Index", "Products")</li>
+    
+    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+    <li class="headmenuItem">@Html.ActionLink("Administrar productos", "Index", "Product")</li>
 </ul>
 }

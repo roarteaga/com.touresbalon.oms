@@ -10,6 +10,10 @@ namespace webapp.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["token"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 

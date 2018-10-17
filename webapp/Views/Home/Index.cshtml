@@ -8,8 +8,12 @@
     <div class="col-md-4">
         <h2>Servicios disponibles</h2>
         <p>
-            
+
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Administración de productos", "Index", "Product", routeValues: null, htmlAttributes: new { @class="btn btn-default"})
+            </li>
+        </ul>
     </div>
 </div>
