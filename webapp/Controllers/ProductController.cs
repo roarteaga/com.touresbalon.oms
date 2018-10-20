@@ -16,19 +16,30 @@ namespace webapp.Controllers
 {
     public class ProductController : Controller
     {
-        
+
         public async Task<ActionResult> Index()
         {
             if (Session["token"] != null)
             {
                 ProductService productService = new ProductService();
-                return View(await productService.GetAllProducts());
+                return View(await productService.GetAllProducts(Session["token"].ToString()));
             }
             else
             {
                 return RedirectToAction("Login", "Account");
             }
-
+        }
+        public async Task<ActionResult> Edit(int id)
+        {
+            if (Session["token"] != null)
+            {
+                ProductService productService = new ProductService();
+                return View(await productService.GetProduct(Session["token"].ToString(), id.ToString()));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
     }
 }

@@ -516,6 +516,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Product\View.cshtml" />
     <Content Include="Views\Campaign\Index.cshtml" />
+    <Content Include="Views\Product\_EditProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -544,9 +545,9 @@
       <Project>{4d775dc8-bada-4485-8560-4ed8cd2f1c89}</Project>
       <Name>LoginObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RestServices\RestServices.csproj">
+    <ProjectReference Include="..\RestServices\Services.csproj">
       <Project>{40FF2D1F-FD22-4DF6-B3F1-4B99251F2C2A}</Project>
-      <Name>RestServices</Name>
+      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\UtilitiesLibrary\UtilitiesLibrary.csproj">
       <Project>{e5b8b595-31ca-4fd5-837f-77c79d7e4502}</Project>

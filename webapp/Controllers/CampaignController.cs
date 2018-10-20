@@ -18,7 +18,7 @@ namespace webapp.Controllers
             if (Session["token"] != null)
             {
                 CampaignService campaignService = new CampaignService();
-                return View(await campaignService.GetAllCampaigns());
+                return View(await campaignService.GetAllCampaigns(Session["token"].ToString()));
             }
             else
             {

@@ -16,7 +16,7 @@ namespace RestServices
     {
         protected static readonly ILog log = LogManager.GetLogger(typeof(CampaignService));
         static string Baseurl = ConfigurationManager.AppSettings["CampaignGetServiceRoute"];
-        public async Task<List<Campaign>> GetAllCampaigns()
+        public async Task<List<Campaign>> GetAllCampaigns(string token)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -31,6 +31,7 @@ namespace RestServices
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Authorization", token);
                     HttpResponseMessage Res = await client.PostAsync(ConfigurationManager.AppSettings["CampaignGetServiceRoute"], null);
                     if (Res.IsSuccessStatusCode)
                     {

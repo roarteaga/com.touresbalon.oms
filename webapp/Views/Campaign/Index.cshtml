@@ -1,69 +1,61 @@
 ﻿@model IEnumerable<BusinessObjects.Campaign>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Administración de campañas";
 }
 
-<h2>Index</h2>
+<h2>Administración de campañas</h2>
+
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a data-toggle="tooltip" title="Crear" class="btn btn-primary" href=@Url.Action("Create")><span class="glyphicon glyphicon-plus"></span></a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idStateCampaign)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.urlImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idProduct)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.startDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endDate)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idStateCampaign)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.urlImage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idProduct)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.startDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.endDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idCampaign }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idCampaign }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idCampaign })
-        </td>
-    </tr>
-}
+<table class="table" id="campaignsList">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Fecha inicio
+            </th>
+            <th>
+                Fecha fin
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+                <td>
+                    <a data-toggle="tooltip" title="Editar" class="btn btn-sm btn-success" href=@Url.Action("Edit", new { Id = item.idCampaign })><span class="glyphicon glyphicon-cog"></span></a>
+                    <a data-toggle="tooltip" title="Eliminar" class="btn btn-sm btn-danger" onClick="LoadModal('@Url.Action("Delete", new { Id = item.idCampaign})')"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+
+<script>
+    $(document).ready(function () {
+        $("#campaignsList").DataTable();
+    })
+</script>
