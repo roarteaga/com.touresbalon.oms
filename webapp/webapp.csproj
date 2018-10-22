@@ -517,6 +517,7 @@
     <Content Include="Views\Product\View.cshtml" />
     <Content Include="Views\Campaign\Index.cshtml" />
     <Content Include="Views\Product\_EditProduct.cshtml" />
+    <Content Include="Views\Product\_CreateProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -552,6 +553,10 @@
     <ProjectReference Include="..\UtilitiesLibrary\UtilitiesLibrary.csproj">
       <Project>{e5b8b595-31ca-4fd5-837f-77c79d7e4502}</Project>
       <Name>UtilitiesLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilitiesProject\UtilitiesObjects.csproj">
+      <Project>{61D77DF7-B459-4F0D-B16D-F4B284DCAC7C}</Project>
+      <Name>UtilitiesObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -23,42 +23,32 @@ namespace RestServices
         static string Baseurl = ConfigurationManager.AppSettings["ProductGetServiceRoute"];
         public async Task<Product> GetProduct(string token,string id)
         {
-            List<JsonPostParameters> parametros = new List<JsonPostParameters>();
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
             JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
-            parametros.Add(new JsonPostParameters("Authorization", token));
-            string response =  await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["ProductGetServiceRoute"].ToString(),Baseurl,HttpMethod.POST);
+            parametros.Add(new JsonHeaders("Authorization", token));
+            UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["ProductGetIdServiceRoute"].ToString());
+            builder.Query = "Id=" + id;
+            string response =  await jadapters.GetJson(parametros,builder.Uri.ToString(),Baseurl,HttpMethod.GET);
             Product retObj = JsonConvert.DeserializeObject<Product>(response);
             return retObj;
         }
         public async Task<List<Product>> GetAllProducts(string token)
         {
-            List<JsonPostParameters> parametros = new List<JsonPostParameters>();
-            parametros.Add(new JsonPostParameters("Authorization", token));
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            parametros.Add(new JsonHeaders("Authorization", token));
             JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
-            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["ProductGetServiceRoute"].ToString(),Baseurl, HttpMethod.POST);
+            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["ProductGetServiceRoute"].ToString(),Baseurl, HttpMethod.GET);
             List<Product> retObj = JsonConvert.DeserializeObject<List<Product>>(response);
             return retObj;
         }
-        
-        public string DecodeFrom( string myString)
+        public async Task<Response> EditProduct(Product product,string token)
         {
-            // read the string as UTF-8 bytes.
-            //byte[] bytes = Encoding.Default.GetBytes(myString);
-            //string newString = Encoding.UTF8.GetString(bytes);
-            //string newString =HttpUtility.UrlDecode(bytes, Encoding.GetEncoding("utf-8"));
-
-
-            //return ;
-            return "";
-        }
-        public async void AddProduct(Product product)
-        {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                Converters = new List<JsonConverter> { new JsonFix() },
-                DateParseHandling = DateParseHandling.None
-            };
-
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            parametros.Add(new JsonHeaders("Authorization", token));
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["ProductEditServiceRoute"].ToString(), Baseurl, HttpMethod.GET);
+            Response retObj = JsonConvert.DeserializeObject<Response>(response);
+            return retObj;
         }
     }
 }

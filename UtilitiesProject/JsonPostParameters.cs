@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace UtilitiesProject
 {
-    public class JsonPostParameters
+    public class JsonHeaders
     {
-        public JsonPostParameters(string llave,string valor)
+        public JsonHeaders(string llave,string valor)
         {
             this.Llave = llave;
             this.Valor = valor;

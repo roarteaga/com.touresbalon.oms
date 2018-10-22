@@ -35,21 +35,26 @@
 
                 <td>
                     @*<a data-toggle="tooltip" title="Editar" class="btn btn-sm btn-success" href=@Url.Action("Edit", new x{ Id = item.idProduct })><span class="glyphicon glyphicon-cog"></span></a>*@
-                    <a data-toggle="tooltip" title="Editar" class="btn btn-sm btn-success" onclick="LoadModal('@Url.Action("Edit", new { IdGnVigilado = ViewBag.Id, Id = item.idProduct})')"><span class="glyphicon glyphicon-cog"></span></a>
-                    
-                    <a data-toggle="tooltip" title="Eliminar" class="btn btn-sm btn-danger" onClick="LoadModal('@Url.Action("Delete", new { Id = item.idProduct})')"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a data-toggle="tooltip" title="Editar" class="btn btn-sm btn-success" onclick="LoadModal('@Url.Action("EditProduct", new { Id = item.idProduct})')"><span class="glyphicon glyphicon-cog"></span></a>
+
+                    <a data-toggle="tooltip" title="Eliminar" class="btn btn-sm btn-danger" onClick="LoadModal('@Url.Action("DeleteProduct", new { Id = item.idProduct})')"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<script>
-    $(document).ready(function () {
-        $("#productsList").DataTable();
-    })
-    function LoadModal(url) {
-        $("#ModalUser").load(url + '&Token=' + new Date().getTime(), function () {
-            $("#ModalUser").modal("show");
-        });
-    }
-</script>
+<div class="modal fade" id="ModalProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#productsList").DataTable();
+        })
+        function LoadModal(url) {
+            $("#ModalProduct").load(url, function () {
+                $("#ModalProduct").modal("show");
+            });
+        }
+    </script>
+}

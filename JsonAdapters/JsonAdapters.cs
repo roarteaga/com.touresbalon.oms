@@ -17,7 +17,7 @@ namespace JsonAdapters
     public class JsonAdapters
     {
         protected static readonly ILog log = LogManager.GetLogger(typeof(JsonAdapters));
-        public async Task<string> GetJson(List<JsonPostParameters> parameters, string serviceRoute,string Baseurl, HttpMethod method)
+        public async Task<string> GetJson(List<JsonHeaders> parameters, string serviceRoute,string Baseurl, HttpMethod method)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -31,15 +31,20 @@ namespace JsonAdapters
                 {
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    client.DefaultRequestHeaders.Add("charset", "utf-8");
-                    foreach (JsonPostParameters lv in parameters)
+                    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //client.DefaultRequestHeaders.Add("charset", "utf-8");
+                    foreach (JsonHeaders lv in parameters)
                     {
-                        client.DefaultRequestHeaders.Add(lv.Llave, lv.Valor);
+                        if (lv.Llave.Equals("Authorization"))
+                            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization",lv.Valor);
                     }
                     //client.DefaultRequestHeaders.Add("Content-Type", "application/json");
-                    HttpResponseMessage Res = await client.PostAsync(serviceRoute, null);
+                    
+                    HttpResponseMessage Res;
+                    if (method==HttpMethod.POST)
+                        Res= await client.PostAsync(serviceRoute, null);
+                    else
+                        Res = await client.GetAsync(serviceRoute);
                     if (Res.IsSuccessStatusCode)
                     {
                         var response = Res.Content.ReadAsStringAsync().Result;

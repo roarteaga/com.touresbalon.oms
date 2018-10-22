@@ -40,7 +40,7 @@ namespace RestServices
                     if (Res.IsSuccessStatusCode)
                     {
                         var response = Res.Content.ReadAsStringAsync().Result;
-                        token = response;
+                        token = response.Replace("\"","");
                     }
                 }
                 catch (Exception exp)
