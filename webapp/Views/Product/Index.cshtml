@@ -1,5 +1,5 @@
-﻿@model IEnumerable<BusinessObjects.Product>
-
+﻿@using GridMvc.Html
+@model BusinessObjects.ProductResponse
 @{
     ViewBag.Title = "Administración de productos";
 }
@@ -7,53 +7,47 @@
 <h2>Administración de productos</h2>
 
 <p>
-    <a data-toggle="tooltip" title="Crear" class="btn btn-primary" href=@Url.Action("Create")><span class="glyphicon glyphicon-plus"></span></a>
 </p>
-<table class="table" id="productsList">
-    <thead>
-        <tr>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Precio
-            </th>
-            <th>
-                Descripción
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-6"><h3 class="panel-title">Productos</h3></div>
+            <div class="col-md-6"><span class="pull-right"><a id="Crear" data-toggle="tooltip" title="Agregar Producto" class="btn btn-sm btn-success" onClick="LoadModal('@Url.Action("CreateProduct")')"><span class="glyphicon glyphicon-plus"></span> Agregar Producto</a></span></div>
+        </div>
+    </div>
+    <div class="panel-body">
+        @Html.Grid(Model.products).Named("GridProducts").Columns(columns =>
+   {
+       columns.Add(c => c.name).Titled("Nombre").Sortable(true).Filterable(true);
+       columns.Add(c => c.price).Titled("Precio").Sortable(true).Filterable(true);
+       columns.Add(c => c.description).Titled("Descripción").Sortable(true).Filterable(true);
+       columns.Add()
+       .Encoded(false)
+       .Sanitized(false)
+       .SetWidth(100)
+       .Filterable(true)
+       .RenderValueAs(foo =>
+            @<div class="btn-group btn-group-sm">
+                <a data-toggle="tooltip" title="Editar" class="btn btn-sm btn-success" onClick="LoadModal('@Url.Action("EditProduct", new { Id = foo.idProduct})')"><span class="glyphicon glyphicon-cog"></span></a>
+            </div>);
+            }).Selectable(false).WithPaging(10).Sortable(false).Filterable(false).WithMultipleFilters()
+        <hr />
+        <div class="row text-center">
 
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.name)</td>
-                <td>@Html.DisplayFor(modelItem => item.price)</td>
-                <td>@Html.DisplayFor(modelItem => item.description)</td>
-
-                <td>
-                    @*<a data-toggle="tooltip" title="Editar" class="btn btn-sm btn-success" href=@Url.Action("Edit", new x{ Id = item.idProduct })><span class="glyphicon glyphicon-cog"></span></a>*@
-                    <a data-toggle="tooltip" title="Editar" class="btn btn-sm btn-success" onclick="LoadModal('@Url.Action("EditProduct", new { Id = item.idProduct})')"><span class="glyphicon glyphicon-cog"></span></a>
-
-                    <a data-toggle="tooltip" title="Eliminar" class="btn btn-sm btn-danger" onClick="LoadModal('@Url.Action("DeleteProduct", new { Id = item.idProduct})')"><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<div class="modal fade" id="ModalProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        </div>
+    </div>
 </div>
+
+<div class="modal fade" id="ModalIdentificador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
-            $("#productsList").DataTable();
-        })
         function LoadModal(url) {
-            $("#ModalProduct").load(url, function () {
-                $("#ModalProduct").modal("show");
+            $("#ModalIdentificador").load(url, function () {
+                $("#ModalIdentificador").modal("show");
             });
         }
     </script>

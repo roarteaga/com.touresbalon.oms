@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LoginObjects
 {
-    public class LoginViewModel
+    public partial class LoginViewModel
     {
         [Required]
         [Display(Name = "Usuario")]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

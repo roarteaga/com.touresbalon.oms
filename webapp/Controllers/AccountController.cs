@@ -80,11 +80,11 @@ namespace webapp.Controllers
             ViewBag.ReturnUrl = returnUrl;
             //string token = UtilitiesLibrary.TokenGenerator.GenerateTokenJwt("rodolfo.arteaga");
             AuthService auth = new AuthService();
-            string token = await auth.authentication(model.UserName, model.Password);
+            string token = await auth.authentication(model.Username, model.Password);
             
             if (token!=null && token != "")
             {
-                Session["user"] = model.UserName;
+                Session["user"] = model.Username;
                 Session["token"] = token;
                 return RedirectToAction("Index", "Home");
             }

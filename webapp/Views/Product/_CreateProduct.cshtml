@@ -116,43 +116,7 @@
     </div>
 </div>
 <script>
-    $("#IdTrTipoVigilado").on("change", function () {
-        var target = '#' + $(this).attr("target");
-        var Value = null;
-        $(target).empty();
-        $.ajax({
-            type: "GET",
-            url: "@Url.Action("GetSubTipoVigilado")",
-            datatype: "Json",
-            data: { Id: $(this).val() },
-            success: function (data) {
-                $.each(data, function (index, Item) {
-                    $(target).append('<option value="' + Item.Value + '">' + Item.Text + '</option>');
-                    if (Value == null)
-                        Value = Item.Value;
-                });
-                $(target).trigger('change');
-            }
-        });
-    });
-
-    $("#IdTrSubTipoVigilado").on("change", function () {
-        var target = '#' + $(this).attr("target");
-        console.log(target);
-        $(target).empty();
-        $.ajax({
-            type: "GET",
-            url: "@Url.Action("GetGrupoTipoVigilado")",
-            datatype: "Json",
-            data: { Id: $(this).val() },
-            success: function (data) {
-                $.each(data, function (index, Item) {
-                    $(target).append('<option value="' + Item.Value + '">' + Item.Text + '</option>');
-                });
-            }
-        });
-    });
-
+   
     var SaveSucces = function (data) {
         console.log(data);
         if (data.success) {

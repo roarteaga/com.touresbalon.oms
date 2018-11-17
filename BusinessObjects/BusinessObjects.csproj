@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Campaign.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
