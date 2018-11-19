@@ -10,15 +10,28 @@ namespace BusinessObjects
     public class Campaign
     {
         [Key]
-        public string idCampaign { get; set; }
-        public string name { get; set; }
-        public string idStateCampaign { get; set; }
-        public string urlImage { get; set; }
-        public string description { get; set; }
-        public string idProduct { get; set; }
-        public string startDate { get; set; }
-        public string endDate { get; set; }
+        public long idCampaign { get; set; }
 
+        [Required]
+        public string name { get; set; }
+
+        public long idStateCampaign { get; set; }
+
+        [Required]
+        public string urlImage { get; set; }
+
+        [Required]
+        public string description { get; set; }
+
+        public long? idProduct { get; set; }
+
+        public DateTime? startDate { get; set; }
+
+        public DateTime? endDate { get; set; }
+
+        public long? idUser { get; set; }
+
+        public DateTime? modificationDate { get; set; }
 
     }
 }

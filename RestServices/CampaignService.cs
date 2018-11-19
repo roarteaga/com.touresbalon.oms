@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using UtilitiesLibrary;
+using UtilitiesProject;
 
 namespace RestServices
 {
@@ -16,34 +17,43 @@ namespace RestServices
     {
         protected static readonly ILog log = LogManager.GetLogger(typeof(CampaignService));
         static string Baseurl = ConfigurationManager.AppSettings["CampaignGetServiceRoute"];
-        public async Task<List<Campaign>> GetAllCampaigns(string token)
+        public async Task<CampaignResponse> GetAllCampaigns(string token,int? page)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                Converters = new List<JsonConverter> { new JsonFix() },
-                DateParseHandling = DateParseHandling.None
-            };
-            List<Campaign> retObj = new List<Campaign>();
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    client.BaseAddress = new Uri(Baseurl);
-                    client.DefaultRequestHeaders.Clear();
-                    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Add("Authorization", token);
-                    HttpResponseMessage Res = await client.PostAsync(ConfigurationManager.AppSettings["CampaignGetServiceRoute"], null);
-                    if (Res.IsSuccessStatusCode)
-                    {
-                        var response = Res.Content.ReadAsStringAsync().Result;
-                        retObj = JsonConvert.DeserializeObject<List<Campaign>>(response, settings);
-                    }
-                }
-                catch (Exception exp)
-                {
-                    log.Error("CampaignGetServiceRoute", exp);
-                }
-            }
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            parametros.Add(new JsonHeaders("Authorization", token));
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            int pageSend = page.HasValue ? page.Value : 1;
+            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["CampaignGetServiceRoute"].ToString(), pageSend, Baseurl, UtilitiesProject.HttpMethod.GET);
+            CampaignResponse retObj = JsonConvert.DeserializeObject<CampaignResponse>(response);
+            return retObj;
+        }
+        public async Task<Response> CreateCampaign(Campaign campaign, string token)
+        {
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            parametros.Add(new JsonHeaders("Authorization", token));
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["CampaignCreateServiceRoute"].ToString(), campaign, Baseurl, UtilitiesProject.HttpMethod.POST);
+            Response retObj = JsonConvert.DeserializeObject<Response>(response);
+            return retObj;
+        }
+        public async Task<Response> EditCampaign(Campaign campaign, string token)
+        {
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            parametros.Add(new JsonHeaders("Authorization", token));
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["CampaignEditServiceRoute"].ToString(), campaign, Baseurl, UtilitiesProject.HttpMethod.POST);
+            Response retObj = JsonConvert.DeserializeObject<Response>(response);
+            return retObj;
+        }
+        public async Task<Campaign> GetCampaign(string token, string id)
+        {
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            parametros.Add(new JsonHeaders("Authorization", token));
+            UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["CampaignGetIdServiceRoute"].ToString());
+            builder.Query = "Id=" + id;
+            string response = await jadapters.GetJson(parametros, builder.Uri.ToString(), null, Baseurl, UtilitiesProject.HttpMethod.GET);
+            Campaign retObj = JsonConvert.DeserializeObject<Campaign>(response);
             return retObj;
         }
     }

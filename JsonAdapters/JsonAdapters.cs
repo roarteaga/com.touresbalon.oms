@@ -49,10 +49,14 @@ namespace JsonAdapters
                         var stringPayload = await Task.Run(() => JsonConvert.SerializeObject(objectReq));
                         httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
                     }
-                    if (method==HttpMethod.POST)
-                        Res= await client.PostAsync(serviceRoute, httpContent);
+                    if (method == HttpMethod.POST)
+                        Res = await client.PostAsync(serviceRoute, httpContent);
                     else
-                        Res = await client.GetAsync(serviceRoute+ @"/"+objectReq);
+                    {
+                        if (objectReq != "")
+                            objectReq = @"/" + objectReq;
+                        Res = await client.GetAsync(serviceRoute + objectReq);
+                    }
                     if (Res.IsSuccessStatusCode)
                     {
                         var response = Res.Content.ReadAsStringAsync().Result;
