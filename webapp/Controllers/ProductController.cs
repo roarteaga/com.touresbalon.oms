@@ -203,7 +203,7 @@ namespace webapp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> CreateProduct([Bind(Include = "idTransport,idEntertainment,idHotel,name,urlImage,price,discountRate,code,source_city,target_city,spectacle_date,arrival_date,departure_date,description,IdUser,EventDate")]Product product, string listTransport, string listEntertainment, string listHotel)
+        public async Task<ActionResult> CreateProduct([Bind(Include = "idTransport,idEntertainment,idHotel,name,urlImage,price,discountRate,code,source_city,target_city,spectacle_date,arrival_date,departure_date,description,IdUser,EventDate")]Product product, string listTransport, string listEntertainment, string listHotel)
         {
             long idTransport = 0;
             long idEntretiment = 0;
@@ -233,15 +233,17 @@ namespace webapp.Controllers
                     log.Error("ProductController/EditProduct", exp);
                 }
             }
-            return new JsonResult()
-            {
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = message.Description
-            };
+            //return new JsonResult()
+            //{
+            //    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+            //    Data = message.Description
+            //};
+            return RedirectToAction("", "Product");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> EditProduct([Bind(Include= "idProduct,idTransport,idEntertainment,idHotel,name,urlImage,price,discountRate,code,source_city,target_city,spectacle_date,arrival_date,departure_date,description,IdUser,EventDate")]Product product,string listTransport,string listEntertainment,string listHotel)
+        //public async Task<ActionResult> Index()
+        public async Task<ActionResult> EditProduct([Bind(Include= "idProduct,idTransport,idEntertainment,idHotel,name,urlImage,price,discountRate,code,source_city,target_city,spectacle_date,arrival_date,departure_date,description,IdUser,EventDate")]Product product,string listTransport,string listEntertainment,string listHotel)
         {
             Response message=new UtilitiesProject.Response();
 
@@ -267,11 +269,13 @@ namespace webapp.Controllers
                     log.Error("ProductController/EditProduct", exp);
                 }
             }
-            return new JsonResult()
-            {
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = message.Description
-            };
+            return RedirectToAction("","Product");
+            //return new JsonResult()
+            //{
+
+            //    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+            //    Data = message.Description
+            //};
         }
     }
 }

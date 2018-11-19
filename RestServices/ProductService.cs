@@ -27,7 +27,7 @@ namespace RestServices
             JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
             parametros.Add(new JsonHeaders("Authorization", token));
             UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["ProductGetIdServiceRoute"].ToString());
-            builder.Query = "Id=" + id;
+            builder.Query = "Id=" + id;                                           
             string response =  await jadapters.GetJson(parametros,builder.Uri.ToString(),null,Baseurl,HttpMethod.GET);
             Product retObj = JsonConvert.DeserializeObject<Product>(response);
             return retObj;

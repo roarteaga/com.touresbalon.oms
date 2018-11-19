@@ -19,8 +19,8 @@ namespace JsonAdapters
         protected static readonly ILog log = LogManager.GetLogger(typeof(JsonAdapters));
         public async Task<string> GetJson(List<JsonHeaders> parameters, string serviceRoute,object objectReq,string Baseurl, HttpMethod method)
         {
-            if (objectReq == null)
-                objectReq = "";
+            //if (objectReq == null)
+            //    //objectReq = "";
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 Converters = new List<JsonConverter> { new JsonFix() },
@@ -51,8 +51,10 @@ namespace JsonAdapters
                     }
                     if (method==HttpMethod.POST)
                         Res= await client.PostAsync(serviceRoute, httpContent);
-                    else
+                    else if (objectReq != null)
                         Res = await client.GetAsync(serviceRoute+ @"/"+objectReq);
+                    else
+                        Res = await client.GetAsync(serviceRoute);
                     if (Res.IsSuccessStatusCode)
                     {
                         var response = Res.Content.ReadAsStringAsync().Result;
