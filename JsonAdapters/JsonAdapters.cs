@@ -55,6 +55,7 @@ namespace JsonAdapters
                         Res = await client.GetAsync(serviceRoute+ @"/"+objectReq);
                     else
                         Res = await client.GetAsync(serviceRoute);
+
                     if (Res.IsSuccessStatusCode)
                     {
                         var response = Res.Content.ReadAsStringAsync().Result;
