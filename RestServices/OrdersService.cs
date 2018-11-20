@@ -30,5 +30,16 @@ namespace RestServices
             Order retObj = JsonConvert.DeserializeObject<Order>(response);
             return retObj;
         }
+
+        public async Task<Response> CancelOrderAsync(string token, long idOrden)
+        {
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            parametros.Add(new JsonHeaders("Authorization", token));
+            UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["OrdersCancelServiceRoute"].ToString());
+            string response = await jadapters.GetJson(parametros, builder.Uri.ToString(), null, Baseurl, UtilitiesProject.HttpMethod.GET);
+            Response retObj = JsonConvert.DeserializeObject<Response>(response);
+            return retObj;
+        }
     }
 }

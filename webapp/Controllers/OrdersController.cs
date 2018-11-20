@@ -39,7 +39,7 @@ namespace webapp.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult> SearchOrder(string IdOrden, string IdProducto, int? page)
+        public async Task<ActionResult> Index(string IdOrden, string IdProducto, int? page)
         {
 
             if (page == null)
@@ -58,6 +58,20 @@ namespace webapp.Controllers
                 Pager = (Pager)pager
             };
             return View(viewModel);
+        }
+        public async Task<ActionResult> Cancelar(long IdOrden,string cancel)
+        {
+            OrdersService ordersService = new OrdersService();
+            var order= await ordersService.CancelOrderAsync(Session["token"].ToString(), IdOrden);
+            var pager = new Pager(1, 1, 10, 1);
+            var ordersResponse = new OrdersResponse();
+            var viewModel = new IndexViewModelOrders
+            {
+                Items = ordersResponse.orders,
+                Pager = pager
+            };
+            return View(viewModel);
+
         }
     }
 }

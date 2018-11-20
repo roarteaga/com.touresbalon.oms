@@ -30,9 +30,9 @@
            .SetWidth(50)
            .Filterable(true)
            .RenderValueAs(foo =>
-                                                                                        @<div class="btn-group btn-group-sm">
-                                                                                            <a data-toggle="tooltip" title="Cancelar" class="btn btn-sm btn-success" onClick="LoadModal('@Url.Action("CancelOrder", new { Id = foo.idOrder})')"><span class="glyphicon glyphicon-cog"></span></a>
-                                                                                        </div>);
+@<div class="btn-group btn-group-sm">
+    @Html.ActionLink("Cancelar", "Cancelar", new { IdOrden = foo.idOrder,cancel="" }, htmlAttributes: new { @class = "list-group-item list-group-item-action" })
+</div>);
             }).Selectable(false).WithPaging(10).Sortable(false).Filterable(false).WithMultipleFilters()
             <hr />
             <div class="row text-center">
@@ -75,19 +75,19 @@
             }
         </div>
     </div>
-    @using (Ajax.BeginForm("SearchOrder", new AjaxOptions { OnSuccess = "SaveSucces", OnFailure = "SaveError" }))
+    @using (Ajax.BeginForm("Index", new AjaxOptions { OnSuccess = "SaveSucces", OnFailure = "SaveError" }))
     {
         <div class="col-md-9">
             @Html.Label("Buscar por Id de orden", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-9">
-            @Html.EditorFor(Model => Model.IdOrden, new { htmlAttributes = new { @class = "form-control dvBlock" } })
+            @Html.EditorFor(Model => Model.IdOrden, new { htmlAttributes = new { @class = "form-control dvBlock" },@onclick="deleteProduct();" })
         </div>
         <div class="col-md-9">
             @Html.Label("Buscar por Id de producto", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-9">
-            @Html.EditorFor(Model => Model.IdProducto, new { htmlAttributes = new { @class = "form-control dvBlock" } })
+            @Html.EditorFor(Model => Model.IdProducto, new { htmlAttributes = new { @class = "form-control dvBlock" },@onclick="deleteOrden();" })
         </div>
         <div class="modal-footer">
             <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Buscar</button>
