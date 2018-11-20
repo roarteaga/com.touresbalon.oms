@@ -70,7 +70,7 @@ namespace webapp.Controllers
                 Items = ordersResponse.orders,
                 Pager = pager
             };
-            return View(viewModel);
+            return RedirectToAction("Index", "Orders");
 
         }
     }

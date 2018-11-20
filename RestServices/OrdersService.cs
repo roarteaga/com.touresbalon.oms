@@ -37,6 +37,7 @@ namespace RestServices
             JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
             parametros.Add(new JsonHeaders("Authorization", token));
             UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["OrdersCancelServiceRoute"].ToString());
+            builder.Query = "Id=" + idOrden;
             string response = await jadapters.GetJson(parametros, builder.Uri.ToString(), null, Baseurl, UtilitiesProject.HttpMethod.GET);
             Response retObj = JsonConvert.DeserializeObject<Response>(response);
             return retObj;
