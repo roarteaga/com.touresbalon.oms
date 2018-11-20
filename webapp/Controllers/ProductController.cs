@@ -18,13 +18,20 @@ namespace webapp.Controllers
     public class ProductController : Controller
     {
         protected static readonly ILog log = LogManager.GetLogger(typeof(ProductController));
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
             if (Session["token"] != null)
             {
+                if (page == null) page = 1;
                 ProductService productService = new ProductService();
-                ProductResponse response = await productService.GetAllProducts(Session["token"].ToString());
-                return View(response);
+                var productResponse = await productService.GetAllProducts(Session["token"].ToString(), page);
+                var pager = new Pager(productResponse.products.Count(), page, 10, productResponse.totalPaginas.Value + 1);
+                var viewModel = new IndexViewModelProducts
+                {
+                    Items = productResponse.products,
+                    Pager = pager
+                };
+                return View(viewModel);
             }
             else
             {

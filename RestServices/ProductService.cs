@@ -32,12 +32,13 @@ namespace RestServices
             Product retObj = JsonConvert.DeserializeObject<Product>(response);
             return retObj;
         }
-        public async Task<ProductResponse> GetAllProducts(string token)
+        public async Task<ProductResponse> GetAllProducts(string token, int? page)
         {
             List<JsonHeaders> parametros = new List<JsonHeaders>();
             parametros.Add(new JsonHeaders("Authorization", token));
             JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
-            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["ProductGetServiceRoute"].ToString(),1,Baseurl, HttpMethod.GET);
+            int pageSend = page.HasValue ? page.Value : 1;
+            string response = await jadapters.GetJson(parametros, ConfigurationManager.AppSettings["ProductGetServiceRoute"].ToString(), pageSend, Baseurl, HttpMethod.GET);
             ProductResponse retObj = JsonConvert.DeserializeObject<ProductResponse>(response);
             return retObj;
         }

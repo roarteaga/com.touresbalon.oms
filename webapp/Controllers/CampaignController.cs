@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UtilitiesProject;
-using PagedList;
 namespace webapp.Controllers
 {
     public class CampaignController : Controller

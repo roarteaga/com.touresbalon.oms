@@ -17,7 +17,11 @@ namespace UtilitiesProject
         public IEnumerable<Order> Items { get; set; }
         public Pager Pager { get; set; }
     }
-
+    public class IndexViewModelProducts
+    {
+        public IEnumerable<Product> Items { get; set; }
+        public Pager Pager { get; set; }
+    }
     public class Pager
     {
         public Pager(int totalItems, int? page, int pageSize,int totalPag)
