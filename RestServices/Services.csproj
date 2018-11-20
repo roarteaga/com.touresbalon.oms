@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AuthService.cs" />
     <Compile Include="CampaignService.cs" />
+    <Compile Include="OrdersService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,9 +2,10 @@
 @if (Session["token"]!=null)
 {
 <ul class="nav navbar-nav">
-    
+
     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
     <li class="headmenuItem">@Html.ActionLink("Administrar productos", "Index", "Product")</li>
     <li class="headmenuItem">@Html.ActionLink("Administrar campañas", "Index", "Campaign")</li>
+    <li class="headmenuItem">@Html.ActionLink("Administrar órdenes", "Index", "Orders")</li>
 </ul>
 }

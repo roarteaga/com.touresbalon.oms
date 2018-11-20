@@ -4,89 +4,107 @@
     ViewBag.Title = "Buscar órden";
 }
 
-<h2 style="padding-top:20px">Búsqueda de órdenes</h2>
+<h2 style="padding-top:50px">Búsqueda de órdenes</h2>
 
 <p>
 </p>
-<div class="panel panel-success">
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-md-6"><h3 class="panel-title">Órdenes</h3></div>
-            
+
+<div class="row">
+
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+
         </div>
-    </div>
-    <div class="panel-body">
-        @Html.Grid(Model.Items).Named("GridOrders").Columns(columns =>
-   {
-       columns.Add(c => c.idOrder).Titled("Id").Sortable(true).Filterable(true);
-       columns.Add(c => c.creationDate).Titled("Fecha de creación").Sortable(true).Filterable(true);
-       columns.Add(c => c.idCustomer).Titled("Id del Cliente").Sortable(true).Filterable(true);
-       columns.Add(c => c.amount).Titled("Cantidad").Sortable(true).Filterable(true);
-       columns.Add(c => c.idStateOrder).Titled("Estado de la órden").Sortable(true).Filterable(true);
-       columns.Add()
-       .Encoded(false)
-       .Sanitized(false)
-       .SetWidth(50)
-       .Filterable(true)
-       .RenderValueAs(foo =>
-                                            @<div class="btn-group btn-group-sm">
-                                                <a data-toggle="tooltip" title="Cancelar" class="btn btn-sm btn-success" onClick="LoadModal('@Url.Action("CancelOrder", new { Id = foo.idCampaign})')"><span class="glyphicon glyphicon-cog"></span></a>
-                                            </div>);
+        <div class="panel-body">
+            @Html.Grid(Model.Items).Named("GridOrders").Columns(columns =>
+       {
+           columns.Add(c => c.idOrder).Titled("Id").Sortable(true).Filterable(true);
+           columns.Add(c => c.creationDate).Titled("Fecha de creación").Sortable(true).Filterable(true);
+           columns.Add(c => c.idCustomer).Titled("Id del Cliente").Sortable(true).Filterable(true);
+           columns.Add(c => c.amount).Titled("Cantidad").Sortable(true).Filterable(true);
+           columns.Add(c => c.idStateOrder).Titled("Estado de la órden").Sortable(true).Filterable(true);
+           columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(50)
+           .Filterable(true)
+           .RenderValueAs(foo =>
+                                                                                        @<div class="btn-group btn-group-sm">
+                                                                                            <a data-toggle="tooltip" title="Cancelar" class="btn btn-sm btn-success" onClick="LoadModal('@Url.Action("CancelOrder", new { Id = foo.idOrder})')"><span class="glyphicon glyphicon-cog"></span></a>
+                                                                                        </div>);
             }).Selectable(false).WithPaging(10).Sortable(false).Filterable(false).WithMultipleFilters()
-        <hr />
-        <div class="row text-center">
+            <hr />
+            <div class="row text-center">
+
+            </div>
+            <br />
+
+
+            <!-- pager -->
+            @if (Model.Pager.EndPage > 1)
+            {
+                <ul class="pagination">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index")">Primero</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index")?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
+                        </li>
+                    }
+
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                            <a href="@Url.Action("Index")?page=@page">@page</a>
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index")?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index")?page=@(Model.Pager.TotalPages)">Último</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    @using (Ajax.BeginForm("SearchOrder", new AjaxOptions { OnSuccess = "SaveSucces", OnFailure = "SaveError" }))
+    {
+        <div class="col-md-9">
+            @Html.Label("Buscar por Id de orden", htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-9">
+            @Html.EditorFor(Model => Model.IdOrden, new { htmlAttributes = new { @class = "form-control dvBlock" } })
+        </div>
+        <div class="col-md-9">
+            @Html.Label("Buscar por Id de producto", htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-9">
+            @Html.EditorFor(Model => Model.IdProducto, new { htmlAttributes = new { @class = "form-control dvBlock" } })
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Buscar</button>
+        </div>
+
+        <div class="modal fade" id="ModalIdentificador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
         </div>
-        <br />
-
-
-        <!-- pager -->
-        @if (Model.Pager.EndPage > 1)
-        {
-            <ul class="pagination">
-                @if (Model.Pager.CurrentPage > 1)
-                {
-                    <li>
-                        <a href="@Url.Action("Index")">Primero</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Index")?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
-                    </li>
-                }
-
-                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-                {
-                    <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                        <a href="@Url.Action("Index")?page=@page">@page</a>
-                    </li>
-                }
-
-                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                {
-                    <li>
-                        <a href="@Url.Action("Index")?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Index")?page=@(Model.Pager.TotalPages)">Último</a>
-                    </li>
-                }
-            </ul>
-        }
-    </div>
-</div>
-
-<div class="modal fade" id="ModalIdentificador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-</div>
-
-@section Scripts
+    }
+        @section Scripts
 {
-    <script>
-        function LoadModal(url) {
-            $("#ModalIdentificador").load(url, function () {
-                $("#ModalIdentificador").modal("show");
-            });
+            <script>
+                function LoadModal(url) {
+                    $("#ModalIdentificador").load(url, function () {
+                        $("#ModalIdentificador").modal("show");
+                    });
+                }
+            </script>
         }
-    </script>
-}
 

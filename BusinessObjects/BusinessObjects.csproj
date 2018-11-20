@@ -45,6 +45,7 @@
     <Compile Include="Campaign.cs" />
     <Compile Include="CampaignResponse.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="OrdersResponse.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

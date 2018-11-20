@@ -15,6 +15,8 @@ namespace UtilitiesProject
     public class IndexViewModelOrders
     {
         public IEnumerable<Order> Items { get; set; }
+        public string IdOrden { get; set; }
+        public string IdProducto { get; set; }
         public Pager Pager { get; set; }
     }
     public class IndexViewModelProducts
