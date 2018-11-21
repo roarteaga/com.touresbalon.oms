@@ -59,6 +59,33 @@ namespace webapp.Controllers
             };
             return View(viewModel);
         }
+        [HttpPost]
+        public async Task<ActionResult> Index2()
+        {
+            OrdersService ordersService = new OrdersService();
+            List<Order> ordenesAbiertas= await ordersService.GetOrderOpenTop(Session["token"].ToString());
+            int page = 1;
+            var ordersResponse = new OrdersResponse();
+            ordersResponse.orders = new List<Order>();
+            ordersResponse.orders = ordenesAbiertas;
+            ordersResponse.totalPaginas = 0;
+            var pager = new Object();
+            pager = new Pager(ordersResponse.orders.Count(), page, 10, ordersResponse.totalPaginas.Value + 1);
+            var viewModel = new IndexViewModelOrders
+            {
+                Items = ordersResponse.orders,
+                Pager = (Pager)pager
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Index3()
+        {
+            OrdersService ordersService = new OrdersService();
+            List<OrderClosed> ordenesAbiertas = await ordersService.GetOrderClosed(Session["token"].ToString());
+            return View(ordenesAbiertas);
+        }
         public async Task<ActionResult> Cancelar(long IdOrden,string cancel)
         {
             OrdersService ordersService = new OrdersService();

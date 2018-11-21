@@ -42,5 +42,30 @@ namespace RestServices
             Response retObj = JsonConvert.DeserializeObject<Response>(response);
             return retObj;
         }
+
+        public async Task<List<Order>> GetOrderOpenTop(string token)
+        {
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            parametros.Add(new JsonHeaders("Authorization", token));
+            UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["OrdersOpenServiceRoute"].ToString());
+            RequestOpenOrder requestOpenOrder = new RequestOpenOrder();
+            requestOpenOrder.IdOrder = 3;
+            requestOpenOrder.Page = 1;
+            string response = await jadapters.GetJson(parametros, builder.Uri.ToString(), requestOpenOrder, Baseurl, UtilitiesProject.HttpMethod.POST);
+            List<Order> retObj = JsonConvert.DeserializeObject<List<Order>>(response);
+            return retObj;
+        }
+
+        public async Task<List<OrderClosed>> GetOrderClosed(string token)
+        {
+            List<JsonHeaders> parametros = new List<JsonHeaders>();
+            JsonAdapters.JsonAdapters jadapters = new JsonAdapters.JsonAdapters();
+            //parametros.Add(new JsonHeaders("Authorization", token));
+            UriBuilder builder = new UriBuilder(ConfigurationManager.AppSettings["OrdersClosedServiceRoute"].ToString());
+            string response = await jadapters.GetJson(parametros, builder.Uri.ToString(), "", Baseurl, UtilitiesProject.HttpMethod.GET);
+            List<OrderClosed> retObj = JsonConvert.DeserializeObject<List<OrderClosed>>(response);
+            return retObj;
+        }
     }
 }

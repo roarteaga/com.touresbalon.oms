@@ -1,0 +1,45 @@
+﻿@using GridMvc.Html
+@model  IEnumerable<BusinessObjects.OrderClosed>
+@{
+    /**/
+
+    ViewBag.Title = "Total órdenes";
+}
+<h2 style="padding-top:50px">Total órdenes</h2>
+
+<p>
+</p>
+
+<div class="row">
+
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+
+        </div>
+        <div class="panel-body">
+            @Html.Grid(Model).Named("GridOrders").Columns(columns =>
+       {
+           columns.Add(c => c.Periodo).Titled("Periodo").Sortable(true).Filterable(true);
+           columns.Add(c => c.Cantidad).Titled("Cantidad").Sortable(true).Filterable(true);
+           columns.Add(c => c.Facturado).Titled("Facturado").Sortable(true).Filterable(true);
+       }).Selectable(false).WithPaging(10).Sortable(false).Filterable(false).WithMultipleFilters()
+            <hr />
+            <div class="row text-center">
+
+            </div>
+            <br />
+        
+        </div>
+    </div>
+    @section Scripts
+{
+        <script>
+            function LoadModal(url) {
+                $("#ModalIdentificador").load(url, function () {
+                    $("#ModalIdentificador").modal("show");
+                });
+            }
+        </script>
+    }
+

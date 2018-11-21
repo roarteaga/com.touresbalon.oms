@@ -1,7 +1,9 @@
 ﻿@using GridMvc.Html
 @model  UtilitiesProject.IndexViewModelOrders
 @{
-    ViewBag.Title = "Buscar órden";
+                /**/
+
+                ViewBag.Title = "Buscar órden";
 }
 
 <h2 style="padding-top:50px">Búsqueda de órdenes</h2>
@@ -30,9 +32,9 @@
            .SetWidth(50)
            .Filterable(true)
            .RenderValueAs(foo =>
-                        @<div class="btn-group btn-group-sm">
-                            @Html.ActionLink("Cancelar", "Cancelar", new { IdOrden = foo.idOrder, cancel = "" }, htmlAttributes: new { @class = "list-group-item list-group-item-action" })
-                        </div>);
+                    @<div class="btn-group btn-group-sm">
+                        @Html.ActionLink("Cancelar", "Cancelar", new { IdOrden = foo.idOrder, cancel = "" }, htmlAttributes: new { @class = "list-group-item list-group-item-action" })
+                    </div>);
             }).Selectable(false).WithPaging(10).Sortable(false).Filterable(false).WithMultipleFilters()
             <hr />
             <div class="row text-center">
@@ -102,15 +104,11 @@
     }
     @using (Ajax.BeginForm("Index2", new AjaxOptions { OnSuccess = "SaveSucces", OnFailure = "SaveError" }))
     {
-        <div class="modal-footer">
-            <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span>Buscar ordenes que mas llevan tiempo abiertas</button>
+        <div class="col-md-9">
+            @Html.LabelFor(x => x.IdOrden, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
-    }
-    @using (Ajax.BeginForm("Index3", new AjaxOptions { OnSuccess = "SaveSucces", OnFailure = "SaveError" }))
-    {
-
         <div class="modal-footer">
-            <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span>Buscar ordenes cerradas y total facturado mes</button>
+            <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span>Buscar ordenes cerradas y facturado mes</button>
         </div>
     }
     @section Scripts

@@ -552,6 +552,8 @@
     <Content Include="Views\Campaign\_CreateCampaign.cshtml" />
     <Content Include="Views\Campaign\_EditCampaign.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\Index2.cshtml" />
+    <Content Include="Views\Orders\Index3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
